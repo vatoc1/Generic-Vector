@@ -142,13 +142,8 @@ int VectorSearch(Vector * obj,void * key,int isSorted) {
 
 
     void *elem_ptr = NULL;
-    if(isSorted==1) {
-        elem_ptr = bsearch(key,obj->elems,obj->size,obj->elem_size,obj->comp_fn);
-
-    } else {
-        elem_ptr = lfind(key,obj->elems,&obj->size,obj->elem_size,obj->comp_fn);
-
-    }
+    
+    elem_ptr = isSorted==1? bsearch(key,obj->elems,obj->size,obj->elem_size,obj->comp_fn) : lfind(key,obj->elems,&obj->size,obj->elem_size,obj->comp_fn);
 
     return elem_ptr == NULL ? -1 : ((char*)elem_ptr-(char*)obj->elems)/obj->elem_size;
 
